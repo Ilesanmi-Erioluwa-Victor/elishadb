@@ -18,6 +18,8 @@ const CLOUDIANRY_API_KEY = process.env.CLOUDIANRY_API_KEY;
 
 const CLOUDIANRY_API_SECRET = process.env.CLOUDIANRY_API_SECRET;
 
+const NODE_ENV_DEV = process.env.NODE_ENV_MODE;
+
 export const ENV = {
   JWT: {
     SECRET: JWT_SECRET_KEY,
@@ -35,5 +37,8 @@ export const ENV = {
     NAME: CLOUDIANRY_CLOUD_NAME,
     KEY: CLOUDIANRY_API_KEY,
     SECRET: CLOUDIANRY_API_SECRET,
+  },
+  MODE: {
+    MODE: NODE_ENV_DEV,
   },
 };
