@@ -6,8 +6,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 
-import { ENV } from 'configs/envs';
-import { header } from 'middlewares/headers';
+import { ENV } from './configs/envs';
+import { header } from './middlewares/headers';
 
 const app: Application = express();
 

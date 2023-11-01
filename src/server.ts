@@ -1,6 +1,6 @@
-import { prisma } from 'configs/db';
+import { prisma } from './configs/db';
 import app from './app';
-import { ENV } from 'configs/envs';
+import { ENV } from './configs/envs';
 class Server {
   static async Connection(): Promise<void> {
     try {
