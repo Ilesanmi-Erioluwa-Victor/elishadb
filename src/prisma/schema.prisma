@@ -10,12 +10,78 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Admin {
+  id                              Int        @id @default(autoincrement())
+  name                            String
+  email                           String     @unique
+  password                        String
+  role                            Role       @default(MODERATOR)
+  category                        Category[]
+  post                            Post[]
+  isAccountVerified               Bool       @default(false)
+  accountVerificationToken        String?    @default("")
+  accountVerificationTokenExpires DateTime?  @default(now())
+  Event                           Event[]
+  createdAt                       DateTime   @default(now())
+  updatedAt                       DateTime   @updatedAt
+}
+
+enum Role {
+  MODERATOR
+  ADMIN
+}
+
+model Category {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
-  content   String?
-  image     String?
-  published Boolean  @default(false)
+  name      String?  @unique
+  posts     Post[]
+  Admin     Admin    @relation(fields: [adminId], references: [id])
+  adminId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  title      String   @db.VarChar(255)
+  content    String?
+  image      String?
+  numOfView  Int      @default(0)
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  Admin      Admin    @relation(fields: [adminId], references: [id])
+  adminId    Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  date        DateTime
+  location    String
+  description String
+  speakers    Speaker[]
+  Admin       Admin     @relation(fields: [adminId], references: [id])
+  adminId     Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Speaker {
+  id        Int      @id @default(autoincrement())
+  name      String
+  topic     String
+  image     String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Dontate {
+  id        Int      @id @default(autoincrement())
+  amount    Decimal
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
