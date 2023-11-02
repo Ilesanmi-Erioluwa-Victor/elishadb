@@ -18,7 +18,7 @@ model Admin {
   role                            Role       @default(MODERATOR)
   category                        Category[]
   post                            Post[]
-  isAccountVerified               Bool       @default(false)
+  isAccountVerified               Boolean       @default(false)
   accountVerificationToken        String?    @default("")
   accountVerificationTokenExpires DateTime?  @default(now())
   Event                           Event[]
