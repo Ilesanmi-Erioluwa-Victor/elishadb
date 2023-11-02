@@ -18,7 +18,7 @@ model Admin {
   role                            Role       @default(MODERATOR)
   category                        Category[]
   post                            Post[]
-  isAccountVerified               Boolean       @default(false)
+  isAccountVerified               Boolean    @default(false)
   accountVerificationToken        String?    @default("")
   accountVerificationTokenExpires DateTime?  @default(now())
   Event                           Event[]
@@ -80,8 +80,11 @@ model Speaker {
 }
 
 model Dontate {
-  id        Int      @id @default(autoincrement())
-  amount    Decimal
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  amount       Decimal
+  email        String
+  name_on_card String
+  phone_number String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
