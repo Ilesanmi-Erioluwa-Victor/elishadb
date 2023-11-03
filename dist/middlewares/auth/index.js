@@ -15,7 +15,8 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const customError_1 = require("../../errors/customError");
+const customErrors_1 = require("../../errors/customErrors");
+const envs_1 = require("../../configs/envs");
 class Auth {
 }
 exports.Auth = Auth;
@@ -24,12 +25,12 @@ Auth.authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     try {
         const authHeader = req.get('Authorization');
         if (!authHeader)
-            throw new customError_1.BadRequestError('Authorization token is required');
+            throw new customErrors_1.BadRequestError('Authorization token is required');
         let decode;
         const token = authHeader === null || authHeader === void 0 ? void 0 : authHeader.split(' ')[1];
-        decode = jsonwebtoken_1.default.verify(token, `${ENV.JWT.SECRET}`);
+        decode = jsonwebtoken_1.default.verify(token, `${envs_1.ENV.JWT.SECRET}`);
         if (!token || !decode)
-            throw new customError_1.BadRequestError('Invalid token');
+            throw new customErrors_1.BadRequestError('Invalid token');
         req.user = decode;
         next();
     }
