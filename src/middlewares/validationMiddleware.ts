@@ -9,3 +9,7 @@ import {
   NotFoundError,
   UnauthorizedError,
 } from '../errors/customErrors';
+
+import { adminQuery } from '../modules/admin/model/admin.model';
+
+const { findAdminEmailM } = adminQuery;
