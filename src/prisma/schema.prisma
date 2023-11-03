@@ -79,7 +79,7 @@ model Speaker {
   updatedAt DateTime @updatedAt
 }
 
-model Dontate {
+model Donate {
   id           Int      @id @default(autoincrement())
   amount       Decimal
   email        String
