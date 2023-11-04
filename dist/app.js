@@ -11,10 +11,9 @@ const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const compression_1 = __importDefault(require("compression"));
 const express_handlebars_1 = require("express-handlebars");
-const path_1 = __importDefault(require("path"));
 const envs_1 = require("./configs/envs");
 const headers_1 = require("./middlewares/headers");
-const viewsPath = path_1.default.join(__dirname, 'views');
+const admin_auth_routes_1 = __importDefault(require("./modules/admin/routes/admin.auth.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -30,4 +29,5 @@ app.get('/add', (req, res) => {
     res.render('dynamic');
 });
 envs_1.ENV.MODE.MODE === 'development' ? app.use((0, morgan_1.default)('dev')) : '';
+app.use('api/v1/admin_route', admin_auth_routes_1.default);
 exports.default = app;

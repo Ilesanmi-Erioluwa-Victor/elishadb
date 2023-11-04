@@ -8,3 +8,4 @@ const route = express_1.default.Router();
 const auth_1 = require("../../../middlewares/auth");
 const { authenticateUser } = auth_1.Auth;
 route.post("admin_sign_up");
+exports.default = route;

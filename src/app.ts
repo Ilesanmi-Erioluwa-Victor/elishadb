@@ -11,7 +11,7 @@ import path from 'path';
 import { ENV } from './configs/envs';
 import { header } from './middlewares/headers';
 
-const viewsPath = path.join(__dirname, 'views');
+import adminAuth from './modules/admin/routes/admin.auth.routes';
 
 const app: Application = express();
 
@@ -39,5 +39,7 @@ app.get('/add', (req, res) => {
 });
 
 ENV.MODE.MODE === 'development' ? app.use(morgan('dev')) : '';
+
+app.use('api/v1/admin_route', adminAuth);
 
 export default app;
