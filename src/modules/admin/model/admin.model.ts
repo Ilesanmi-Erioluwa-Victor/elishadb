@@ -30,7 +30,7 @@ export class adminQuery {
     const createdAdmin = await prisma.admin.create({
       data: {
         name,
-        email,
+        email: email.toLowerCase(),
         password: await hashedPassword(password),
       },
     });

@@ -10,6 +10,8 @@ import path from 'path';
 
 import { ENV } from './configs/envs';
 import { header } from './middlewares/headers';
+import { _404 } from './errors/_404';
+import errorHandlerMiddleware from './middlewares/errorhandlerMiddleware';
 
 import adminAuth from './modules/admin/routes/admin.auth.routes';
 
@@ -40,6 +42,9 @@ app.get('/add', (req, res) => {
 
 ENV.MODE.MODE === 'development' ? app.use(morgan('dev')) : '';
 
-app.use('api/v1/admin_route', adminAuth);
+app.use('/api/v1/admin_route', adminAuth);
 
+app.all('*', _404.notFound);
+
+app.use(errorHandlerMiddleware);
 export default app;

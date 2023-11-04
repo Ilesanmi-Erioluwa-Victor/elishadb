@@ -40,7 +40,7 @@ class adminQuery {
             const createdAdmin = yield db_1.prisma.admin.create({
                 data: {
                     name,
-                    email,
+                    email: email.toLowerCase(),
                     password: yield hashedPassword(password),
                 },
             });

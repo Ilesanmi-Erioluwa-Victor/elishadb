@@ -10,6 +10,6 @@ import { adminSignup } from '../service/admin.auth.service';
 
 const { authenticateUser } = Auth;
 
-route.post('admin_sign_up', validateAdminSignupInput, adminSignup);
+route.post('/admin_sign_up', validateAdminSignupInput, adminSignup);
 
 export default route;

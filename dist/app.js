@@ -13,6 +13,8 @@ const compression_1 = __importDefault(require("compression"));
 const express_handlebars_1 = require("express-handlebars");
 const envs_1 = require("./configs/envs");
 const headers_1 = require("./middlewares/headers");
+const _404_1 = require("./errors/_404");
+const errorhandlerMiddleware_1 = __importDefault(require("./middlewares/errorhandlerMiddleware"));
 const admin_auth_routes_1 = __importDefault(require("./modules/admin/routes/admin.auth.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -29,5 +31,7 @@ app.get('/add', (req, res) => {
     res.render('dynamic');
 });
 envs_1.ENV.MODE.MODE === 'development' ? app.use((0, morgan_1.default)('dev')) : '';
-app.use('api/v1/admin_route', admin_auth_routes_1.default);
+app.use('/api/v1/admin_route', admin_auth_routes_1.default);
+app.all('*', _404_1._404.notFound);
+app.use(errorhandlerMiddleware_1.default);
 exports.default = app;

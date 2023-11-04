@@ -9,5 +9,5 @@ const auth_1 = require("../../../middlewares/auth");
 const validationMiddleware_1 = require("../../../middlewares/validationMiddleware");
 const admin_auth_service_1 = require("../service/admin.auth.service");
 const { authenticateUser } = auth_1.Auth;
-route.post('admin_sign_up', validationMiddleware_1.validateAdminSignupInput, admin_auth_service_1.adminSignup);
+route.post('/admin_sign_up', validationMiddleware_1.validateAdminSignupInput, admin_auth_service_1.adminSignup);
 exports.default = route;

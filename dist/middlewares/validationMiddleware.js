@@ -30,6 +30,7 @@ const withValidationErrors = (validateValues) => {
                     console.log('from Unauthorized', errorMessages);
                     throw new customErrors_1.UnauthorizedError('not authorized to access this route');
                 }
+                console.log(errorMessages);
                 throw new customErrors_1.BadRequestError(errorMessages);
             }
             next();
